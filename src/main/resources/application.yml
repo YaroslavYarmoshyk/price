@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/pricedb
+#    username: postgres
+#    password: Alonso
+#    driver-class-name: org.postgresql.Driver
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+#    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
+  h2:
+    console:
+      enabled: true
+  main:
+    allow-circular-references: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  sql:
+    init:
+      mode: always
