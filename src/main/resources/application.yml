@@ -2,21 +2,16 @@ server:
   port: 8080
 
 spring:
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/pricedb
-#    username: postgres
-#    password: Alonso
-#    driver-class-name: org.postgresql.Driver
   datasource:
-    url: jdbc:h2:mem:mydb
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
+#    url: jdbc:postgresql://localhost:5432/pricedb
+    url: jdbc:postgresql://etake-db.postgres.database.azure.com:5432/etakeDB?sslmode=require
+    username: etakeAdmin@etake-db
+    password: Alonso1236542!
+    driver-class-name: org.postgresql.Driver
   jpa:
-#    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
     defer-datasource-initialization: true
   h2:
     console:

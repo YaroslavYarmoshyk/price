@@ -6,13 +6,11 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-public class UserRequestDto {
+public class UserResponseDTO {
     private Long id;
     private String email;
     private String name;
     private String lastName;
-    private String password;
     private boolean active;
     private Set<Role> roles;
-
 }

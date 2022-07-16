@@ -5,7 +5,7 @@ import com.prices.exception.SystemException;
 import com.prices.mapper.OrikaBeanMapper;
 import com.prices.model.Role;
 import com.prices.model.User;
-import com.prices.model.dto.UserRequestDto;
+import com.prices.model.dto.UserRequestDTO;
 import com.prices.payload.request.LoginRequest;
 import com.prices.payload.request.SignupRequest;
 import com.prices.security.PasswordEncoder;
@@ -96,7 +96,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
 
         // Check if user exist
-        UserRequestDto userDto = mapper.map(userService.findByEmail(username).orElse(null), UserRequestDto.class);
+        UserRequestDTO userDto = mapper.map(userService.findByEmail(username).orElse(null), UserRequestDTO.class);
         if (Objects.isNull(userDto)) {
             log.warn("User with username {} not found", username);
             return false;

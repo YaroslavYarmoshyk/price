@@ -26,8 +26,6 @@ public class AuthEntryPoint implements AuthenticationEntryPoint {
                          AuthenticationException authException) throws IOException, ServletException {
 
         log.error("Unauthorized error: {}", authException.getMessage());
-//        response.sendError(HttpServletResponse.SC_FORBIDDEN, "Error: Forbidden");
         redirectStrategy.sendRedirect(request, response, LOGIN_PATH);
-//        response.sendRedirect(LOGIN_PATH);
     }
 }

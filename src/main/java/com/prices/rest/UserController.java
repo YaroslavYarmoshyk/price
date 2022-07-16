@@ -2,8 +2,8 @@ package com.prices.rest;
 
 import com.prices.mapper.OrikaBeanMapper;
 import com.prices.model.User;
-import com.prices.model.dto.UserRequestDto;
-import com.prices.model.dto.UserResponseDto;
+import com.prices.model.dto.UserRequestDTO;
+import com.prices.model.dto.UserResponseDTO;
 import com.prices.security.annotation.AdminAccessLevel;
 import com.prices.service.UserService;
 import lombok.AllArgsConstructor;
@@ -28,18 +28,18 @@ public class UserController {
     private final OrikaBeanMapper orikaBeanMapper;
 
     @GetMapping
-    public List<UserResponseDto> getAllUsers() {
+    public List<UserResponseDTO> getAllUsers() {
         return userService.getAllUsers().stream()
-                .map(user -> orikaBeanMapper.map(user, UserResponseDto.class))
+                .map(user -> orikaBeanMapper.map(user, UserResponseDTO.class))
                 .collect(Collectors.toList());
     }
 
     @PostMapping("/save")
     @AdminAccessLevel
-    public UserResponseDto saveUser(@RequestBody UserRequestDto dto) {
+    public UserResponseDTO saveUser(@RequestBody UserRequestDTO dto) {
        User user = userService.save(orikaBeanMapper.map(dto, User.class));
 
-       return orikaBeanMapper.map(user, UserResponseDto.class);
+       return orikaBeanMapper.map(user, UserResponseDTO.class);
     }
 
     @GetMapping("/role/add-to-user")
