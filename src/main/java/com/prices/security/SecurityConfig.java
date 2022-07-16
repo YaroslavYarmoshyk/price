@@ -19,7 +19,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import static com.prices.util.Constants.AUTHENTICATION_PATH;
 import static com.prices.util.Constants.FAVICON;
+import static com.prices.util.Constants.JWT_COOKIE_NAME;
 import static com.prices.util.Constants.LOGIN_PATH;
+import static com.prices.util.Constants.LOGOUT_PATH;
 import static com.prices.util.Constants.REGISTER_PATH;
 import static com.prices.util.Constants.REGISTRATION_PATH;
 import static org.springframework.http.HttpMethod.POST;
@@ -54,6 +56,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(new CustomAuthorizationFilter(jwtProvider, encryptingService), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests().anyRequest().authenticated()
+                .and()
+                .logout()
+                    .logoutUrl(LOGOUT_PATH)
+                    .permitAll()
+                    .deleteCookies("JSESSIONID")
+                    .deleteCookies(JWT_COOKIE_NAME)
+                    .invalidateHttpSession(true)
                 .and()
                 .headers().frameOptions().disable();
     }

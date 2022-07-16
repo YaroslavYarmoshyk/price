@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 import static com.prices.util.Constants.AUTHENTICATION_PATH;
 import static com.prices.util.Constants.FAVICON;
-import static com.prices.util.Constants.JWT_NAME;
+import static com.prices.util.Constants.JWT_COOKIE_NAME;
 import static com.prices.util.Constants.LOGIN_PATH;
 import static com.prices.util.Constants.REGISTER_PATH;
 import static com.prices.util.Constants.REGISTRATION_PATH;
@@ -72,12 +72,12 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
     }
 
     private String getToken(HttpServletRequest request) {
-        WebUtils.getCookie(request, JWT_NAME);
+        WebUtils.getCookie(request, JWT_COOKIE_NAME);
         if (Objects.isNull(request.getCookies())) {
             return null;
         }
 
-        return Arrays.stream(request.getCookies()).filter(c -> c.getName().equals(JWT_NAME))
+        return Arrays.stream(request.getCookies()).filter(c -> c.getName().equals(JWT_COOKIE_NAME))
                 .map(c -> encryptingService.decryptJwt(c.getValue()))
                 .collect(Collectors.joining());
     }
