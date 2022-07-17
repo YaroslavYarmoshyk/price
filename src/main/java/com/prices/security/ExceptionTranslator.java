@@ -1,6 +1,7 @@
 package com.prices.security;
 
 import com.prices.config.CustomRedirectStrategy;
+import com.prices.exception.AuthenticationException;
 import com.prices.model.dto.HttpErrorResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
@@ -51,6 +52,14 @@ public class ExceptionTranslator {
 
     @ExceptionHandler(value = BadCredentialsException.class)
     public void handleBadCredentialsException(final BadCredentialsException e,
+                                              final HttpServletRequest request,
+                                              final HttpServletResponse response) throws IOException {
+        log.error("Username or password invalid");
+        redirectStrategy.sendRedirect(request, response, LOGIN_PATH);
+    }
+
+    @ExceptionHandler(value = AuthenticationException.class)
+    public void handleAuthenticationException(final AuthenticationException e,
                                               final HttpServletRequest request,
                                               final HttpServletResponse response) throws IOException {
         log.error("Username or password invalid");
